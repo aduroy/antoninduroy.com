@@ -13,16 +13,17 @@ from app.achievements import achievements_layout
 from waitress import serve
 
 
-server = Flask(__name__)
-
 app = Dash(
-    server=server,
+    server=__name__,
     external_stylesheets=[
         # "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;900&display=swap"
         # "https://fontsgeek.com/fonts/helvetica-neue-97-black-condensed-oblique"
         "https://fonts.cdnfonts.com/css/helvetica-neue-55"
     ],
 )
+
+server = app.server
+
 
 NAV_TAB_TEXT_STYLE = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
 NAV_TAB_STYLE = {'border-radius': '0px', 'padding': '20px 20px'}
