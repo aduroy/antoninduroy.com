@@ -10,6 +10,9 @@ from app.education import education_layout
 from app.side_quests import side_quests_layout
 from app.achievements import achievements_layout
 
+from waitress import serve
+
+
 server = Flask(__name__)
 
 app = Dash(
@@ -20,8 +23,6 @@ app = Dash(
         "https://fonts.cdnfonts.com/css/helvetica-neue-55"
     ],
 )
-
-server = app.server
 
 NAV_TAB_TEXT_STYLE = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
 NAV_TAB_STYLE = {'border-radius': '0px', 'padding': '20px 20px'}
@@ -95,4 +96,5 @@ app.layout = dmc.MantineProvider(
 
 
 if __name__ == "__main__":
-    app.run_server(debug=False, use_reloader=True)
+    # app.run_server(debug=False, use_reloader=True)
+    serve(app.server, host="0.0.0.0", port=80)
