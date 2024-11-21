@@ -1,4 +1,4 @@
 dash
 dash-mantine-components
 dash-iconify
-uvicorn[standard]
+waitress

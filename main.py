@@ -1,3 +1,5 @@
+from flask import Flask
+
 import dash_mantine_components as dmc
 from dash import Dash
 
@@ -8,14 +10,18 @@ from app.education import education_layout
 from app.side_quests import side_quests_layout
 from app.achievements import achievements_layout
 
+server = Flask(__name__)
+
 app = Dash(
-    __name__,
+    server=server,
     external_stylesheets=[
         # "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;900&display=swap"
         # "https://fontsgeek.com/fonts/helvetica-neue-97-black-condensed-oblique"
         "https://fonts.cdnfonts.com/css/helvetica-neue-55"
     ],
 )
+
+server = app.server
 
 NAV_TAB_TEXT_STYLE = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
 NAV_TAB_STYLE = {'border-radius': '0px', 'padding': '20px 20px'}
