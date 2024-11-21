@@ -1,5 +1,3 @@
-from flask import Flask
-
 import dash_mantine_components as dmc
 from dash import Dash
 
@@ -10,11 +8,9 @@ from app.education import education_layout
 from app.side_quests import side_quests_layout
 from app.achievements import achievements_layout
 
-from waitress import serve
-
 
 app = Dash(
-    server=__name__,
+    __name__,
     external_stylesheets=[
         # "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;900&display=swap"
         # "https://fontsgeek.com/fonts/helvetica-neue-97-black-condensed-oblique"
@@ -97,5 +93,4 @@ app.layout = dmc.MantineProvider(
 
 
 if __name__ == "__main__":
-    # app.run_server(debug=False, use_reloader=True)
-    serve(app.server, host="0.0.0.0", port=8000)
+    app.run_server(debug=False, use_reloader=True)
