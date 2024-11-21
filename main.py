@@ -97,4 +97,4 @@ app.layout = dmc.MantineProvider(
 
 if __name__ == "__main__":
     # app.run_server(debug=False, use_reloader=True)
-    serve(app.server, host="0.0.0.0", port=80)
+    serve(app.server, host="0.0.0.0", port=8000)
