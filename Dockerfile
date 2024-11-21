@@ -8,4 +8,4 @@ RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app /code/app
 
-CMD ["waitress-serve", "--listen=0.0.0.0:8080", "main:server"]
+CMD ["waitress-serve", "--listen=0.0.0.0:80", "main:server"]
