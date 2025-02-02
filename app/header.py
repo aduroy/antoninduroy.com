@@ -33,73 +33,86 @@ class Header:
         else:
             xp = '-'
 
-        layout = dmc.Stack(
+        layout = dmc.GridCol(
             children=[
-                dmc.Image(src=self.avatar_path, width=300, style={'border': '4px solid rgb(193, 194, 197)'}),
-                dmc.Group(
+                dmc.Stack(
                     children=[
-                        dmc.Stack(
+                        # dmc.Image(src=self.avatar_path, h=300, style={'border': '4px solid rgb(193, 194, 197)'}),
+                        html.Img(src=self.avatar_path, width=300, style={'border': '4px solid rgb(193, 194, 197)'}),
+                        dmc.Group(
                             children=[
-                                dmc.Group(
+                                dmc.Stack(
                                     children=[
-                                        DashIconify(icon="jam:heart", height=35, color='rgb(144, 146, 150)'),
-                                        dmc.Text(f'{age} HP', color='primary', style={'font-size': '25px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1.0'})
+                                        dmc.Group(
+                                            children=[
+                                                DashIconify(icon="jam:heart", color='rgb(144, 146, 150)',
+                                                            # style={'font-size': 'min(5vw, 35px)'}),
+                                                            height=35),
+                                                dmc.Text(f'{age} HP', c='primary',
+                                                         # style={'font-size': 'min(5vw, 25px)', 'font-weight': '500',
+                                                         #        'font-style': 'italic', 'line-height': '1.0'})
+                                                         style={'font-size': '25px', 'font-weight': '500',
+                                                                'font-style': 'italic', 'line-height': '1.0'})
+                                            ]
+                                        ),
                                     ]
                                 ),
-                            ]
-                        ),
-                        dmc.Stack(
-                            children=[
-                                dmc.Group(
+                                dmc.Stack(
                                     children=[
-                                        DashIconify(icon="pixelarticons:briefcase", height=35, color='rgb(144, 146, 150)'),
-                                        dmc.Text(f'{xp} XP', color='primary', style={'font-size': '25px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1.0'})
-                                    ]
+                                        dmc.Group(
+                                            children=[
+                                                DashIconify(icon="pixelarticons:briefcase", height=35,
+                                                            color='rgb(144, 146, 150)'),
+                                                dmc.Text(f'{xp} XP', c='primary',
+                                                         style={'font-size': '25px', 'font-weight': '500',
+                                                                'font-style': 'italic', 'line-height': '1.0'})
+                                            ]
+                                        ),
+                                    ],
+                                    # style={'margin-right': '8px'}
                                 ),
                             ],
-                            style={'margin-right': '8px'}
+                            style={'width': '290px', 'margin-right': '8px'},
+                            justify='space-between'
                         ),
                     ],
-                    position='apart'
+                    align='center',
+                    # style={'width': '300px'}
                 ),
             ],
+            span={"base": 12, "sm": 5, "lg": 4},
         )
 
-        return layout
+        grid_columns = [layout]
+
+        return grid_columns
 
     def __render_description(self):
-        style_name = {'font-size': '45px', 'font-weight': '900'}
-        style_subtitle = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
-        style_subtext = {'font-size': '30px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1'}
+        # style_name = {'font-size': 'min(max(3.5vw, 20px), 45px)', 'font-weight': '900'}
+        # style_subtitle = {'font-size': 'min(max(3.5vw, 12px), 20px)', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
+        style_subtext = {'font-size': 'min(max(3.5vw, 20px), 30px)', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1'}
 
-        layout = dmc.Stack(
+        layout = dmc.GridCol(
             children=[
                 dmc.Group(
                     children=[
-                        DashIconify(icon=self.flag_icon, height=40),
+                        DashIconify(icon=self.flag_icon, className='header-name'),
                         dmc.Text(
-                            self.first_name,
-                            style=style_name
-                        ),
-                        dmc.Text(
-                            f'"{self.nick_name}"',
-                            style=style_name
-                        ),
-                        dmc.Text(
-                            self.last_name,
-                            style=style_name
+                            f'{self.first_name} "{self.nick_name}" {self.last_name}',
+                            className='header-name'
                         ),
                     ],
-                    style={'margin-bottom': '70px'}
+                    className='header-name-group'
+                    # style={'margin-bottom': 'min(max(5vw, 30px), 70px)'}
                 ),
                 dmc.Group(
                     children=[
                         dmc.Stack(
                             children=[
-                                dmc.Text('ROLE', color="dimmed", style=style_subtitle),
+                                dmc.Text('ROLE', c="dimmed", className='header-subtitle'),
                                 dmc.Group(
                                     children=[
-                                        dmc.Text(self.role, color='primary', style=style_subtext),
+                                        dmc.Text(self.role, c='primary', className='header-subtext'),
                                     ],
                                 ),
                             ],
@@ -107,9 +120,15 @@ class Header:
                         ),
                         dmc.Stack(
                             children=[
-                                dmc.Text('CONTACT', color="dimmed", style=style_subtitle),
+                                dmc.Text('CONTACT', c="dimmed", className='header-subtitle'),
                                 dmc.Group(
-                                    children=[html.A(DashIconify(icon=c['icon'], height=35, color='rgb(193, 194, 197)'), href=c['link'], target='_blank') for c in self.contact]
+                                    children=[
+                                        html.A(
+                                            DashIconify(icon=c['icon'], className='header-subtext', color='rgb(193, 194, 197)'),
+                                            href=c['link'],
+                                            target='_blank'
+                                        ) for c in self.contact
+                                    ]
                                 ),
                             ],
                             style={'flex': 1}
@@ -121,11 +140,11 @@ class Header:
                     children=[
                         dmc.Stack(
                             children=[
-                                dmc.Text('LOCATION', color="dimmed", style=style_subtitle),
+                                dmc.Text('LOCATION', c="dimmed", className='header-subtitle'),
                                 dmc.Group(
                                     children=[
-                                        DashIconify(icon=self.location.get('icon'), height=25),
-                                        dmc.Text(self.location.get('name'), color='primary', style=style_subtext)
+                                        DashIconify(icon=self.location.get('icon'), className='header-subtext'),
+                                        dmc.Text(self.location.get('name'), c='primary', className='header-subtext')
                                     ],
                                     align='center'
                                 ),
@@ -134,9 +153,9 @@ class Header:
                         ),
                         dmc.Stack(
                             children=[
-                                dmc.Text('LANGUAGES', color="dimmed", style=style_subtitle),
+                                dmc.Text('LANGUAGES', c="dimmed", className='header-subtitle'),
                                 dmc.Group(
-                                    children=[DashIconify(icon=language_icon, height=25) for language_icon in self.language_icons]
+                                    children=[DashIconify(icon=language_icon, className='header-subtext') for language_icon in self.language_icons]
                                 ),
                             ],
                             style={'flex': 1}
@@ -144,20 +163,27 @@ class Header:
                     ],
                 ),
             ],
-            style={'flex-grow': '1'}
+            # style={'flex-grow': '1'}
+            span={"base": 12, "sm": 7, "lg": 8}
         )
 
-        return layout
+        grid_columns = [layout]
+
+        return grid_columns
 
     def render_layout(self):
+        avatar = self.__render_avatar()
+        description = self.__render_description()
+
+        grid_columns = avatar + description
+
         layout = dmc.Card(
-            dmc.Group(
-                children=[
-                    self.__render_avatar(),
-                    self.__render_description(),
-                ],
+            dmc.Grid(
+                children=grid_columns,
                 align='start',
-                style={'gap': '50px'}
+                # style={'gap': '50px'},
+                # gutter='100px',
+                gutter={"base": '50px', "lg": '100px'}
             ),
             withBorder=True,
             radius=0,

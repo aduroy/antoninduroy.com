@@ -1,5 +1,5 @@
 import dash_mantine_components as dmc
-from dash import Dash, html
+from dash import html
 from dash_iconify import DashIconify
 
 from config import app_config
@@ -21,14 +21,13 @@ class EducationMoment:
 
         layout = dmc.Stack(
             children=[
-                dmc.Image(
+                html.Img(
                     src=self.logo['path'],
-                    width=self.logo['size'],
+                    width=self.logo['width'],
                 ),
-                dmc.Text(f'{self.handle["display_name"]}', color='dimmed', style=style_subtitle),
+                dmc.Text(f'{self.handle["display_name"]}', c='dimmed', style=style_subtitle),
             ],
             align='center',
-            style={'height': '100%', 'width': '100%', 'justify-content': 'center'}
         )
 
         return layout
@@ -37,60 +36,50 @@ class EducationMoment:
         style_keywords = {'font-size': '12px', 'font-weight': '300', 'font-style': 'italic', 'padding': '16px 16px'}
         style_title = {'font-size': '30px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'left'}
         style_subtitle = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'justify', 'text-justify': 'inter-word'}
+        style_metadata = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-justify': 'inter-word'}
 
         layout = dmc.Stack(
             children=[
-                dmc.Group(
+                dmc.Grid(
                     children=[
-                        dmc.Stack(
+                        dmc.GridCol(
                             children=[
-                                dmc.Text(self.title, color='primary', style=style_title),
-                            ],
-                            style={'flex-grow': '1'}
-                        ),
-                        dmc.Stack(
-                            children=[
-                                dmc.Group(
+                                dmc.Stack(
                                     children=[
-                                        dmc.Text(f'{self.years["from"]} - {self.years["to"]}', color='primary', style=style_title)
-                                    ],
-                                    align='center',
-                                    position='right'
-                                ),
+                                        dmc.Text(self.title, c='primary', style=style_title),
+                                        dmc.Text(f'{self.subtitle}', c='primary', style=style_subtitle),
+                                    ]
+                                )
                             ],
+                            span={"base": 12, "lg": 8}
+                        ),
+                        dmc.GridCol(
+                            children=[
+                                dmc.Stack(
+                                    children=[
+                                        dmc.Text(f'{self.years["from"]} - {self.years["to"]}', c='primary', style=style_metadata),
+                                        dmc.Group(
+                                            children=[
+                                                dmc.Text(self.location['name'], c='primary', style=style_metadata),
+                                                DashIconify(icon=self.location['icon'], height=20),
+                                            ],
+                                        ),
+                                    ]
+                                )
+                            ],
+                            span='content'
                         )
                     ],
                     align='end',
+                    justify='space-between',
+                    style={'margin-bottom': '40px'},
+                    className='education-moment-period'
                 ),
                 dmc.Group(
                     children=[
                         dmc.Stack(
                             children=[
-                                dmc.Text(f'{self.subtitle}', color='dimmed', style=style_subtitle),
-                            ],
-                            style={'flex-grow': '1'}
-                        ),
-                        dmc.Stack(
-                            children=[
-                                dmc.Group(
-                                    children=[
-                                        dmc.Text(self.location['name'], color='primary', style=style_subtitle),
-                                        DashIconify(icon=self.location['icon'], height=20),
-                                    ],
-                                    align='center',
-                                    position='right'
-                                ),
-                            ]
-                        )
-                    ],
-                    align='start',
-                    style={'margin-bottom': '40px'}
-                ),
-                dmc.Group(
-                    children=[
-                        dmc.Stack(
-                            children=[
-                                dmc.Text(f'{self.description}', color='dimmed', style=style_subtitle),
+                                dmc.Text(f'{self.description}', c='dimmed', style=style_subtitle),
                             ],
                             style={'flex-grow': '1'}
                         ),
@@ -110,42 +99,44 @@ class EducationMoment:
         return layout
 
     def render_layout(self):
-        layout = dmc.Grid(
-            children=[
-                dmc.Col(
-                    children=[
-                        dmc.Card(
-                            children=[
-                                self.__render_institution()
-                            ],
-                            radius=0,
-                            p=30,
-                            style={
-                                'text-align': 'center',
-                                'height': '100%'
-                            }
-                        )
-                    ],
-                    span=4
-                ),
-                dmc.Col(
-                    children=[
-                        dmc.Card(
-                            children=[
-                                self.__render_description()
-                            ],
-                            radius=0,
-                            p=50,
-                            style={
-                                'text-align': 'center',
-                                'height': '100%'
-                            }
-                        )
-                    ],
-                    span=8
-                ),
-            ],
-            gutter="xl"
+        layout = dmc.GridCol(
+            children=dmc.Grid(
+                children=[
+                    dmc.GridCol(
+                        children=[
+                            dmc.Card(
+                                children=[
+                                    self.__render_institution()
+                                ],
+                                radius=0,
+                                p=30,
+                                style={
+                                    'justify-content': 'center',
+                                    'height': '100%'
+                                }
+                            )
+                        ],
+                        span={"base": 12, "sm": 4}
+                    ),
+                    dmc.GridCol(
+                        children=[
+                            dmc.Card(
+                                children=[
+                                    self.__render_description()
+                                ],
+                                radius=0,
+                                p=50,
+                                style={
+                                    'height': '100%'
+                                }
+                            )
+                        ],
+                        span={"base": 12, "sm": 8}
+                    ),
+                ],
+                gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
+            ),
+            span=12
         )
 
         return layout
@@ -156,9 +147,14 @@ class Education:
         self.education_moments = [EducationMoment(config=em) for em in config]
 
     def render_layout(self):
-        layout = dmc.Stack(
+        # layout = dmc.Stack(
+        #     children=[em.render_layout() for em in self.education_moments],
+        #     gap='xl'
+        # )
+
+        layout = dmc.Grid(
             children=[em.render_layout() for em in self.education_moments],
-            spacing='xl'
+            gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
         )
 
         return layout

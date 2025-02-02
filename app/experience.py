@@ -1,4 +1,5 @@
 import dash_mantine_components as dmc
+from dash import html
 from dash_iconify import DashIconify
 
 from config import app_config
@@ -21,23 +22,22 @@ class ExperienceMoment:
 
         layout = dmc.Stack(
             children=[
-                dmc.Image(
+                html.Img(
                     src=self.logo['path'],
-                    width=self.logo['size'],
+                    width=self.logo['width'],
                 ),
-                dmc.Text(f'{self.company["display_name"]}', color='dimmed', style=style_description),
+                dmc.Text(f'{self.company["display_name"]}', c='dimmed', style=style_description),
                 dmc.Group(
                     children=[
                         dmc.Badge(kw, radius=0, style=style_keywords,
-                                  color='gray', variant='filled'
+                                  color='gray', variant='outline'
                                   ) for kw in self.company["keywords"]
                     ],
-                    position='center',
+                    justify='center',
                     style={'margin-top': '20px'}
                 ),
             ],
             align='center',
-            style={'height': '100%', 'width': '100%', 'justify-content': 'center'}
         )
 
         return layout
@@ -45,7 +45,9 @@ class ExperienceMoment:
     def __render_description(self):
         style_keywords = {'font-size': '12px', 'font-weight': '300', 'font-style': 'italic', 'padding': '16px 16px'}
         style_title = {'font-size': '30px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'left'}
-        style_subtitle = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'left'}
+        style_subtitle = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'justify'}
+        style_bullet_points = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-align': 'left'}
+        style_metadata = {'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '1', 'text-justify': 'inter-word'}
 
         from_to = f'{self.years["from"]} - {self.years["to"]}'
 
@@ -54,7 +56,7 @@ class ExperienceMoment:
             bullets_points = dmc.List(
                 children=[
                     dmc.ListItem(
-                        dmc.Text(f'{d}', color='dimmed', style=style_subtitle)
+                        dmc.Text(f'{d}', c='dimmed', style=style_bullet_points)
                     )
                     for d in self.bullet_points
                 ],
@@ -63,41 +65,45 @@ class ExperienceMoment:
 
         layout = dmc.Stack(
             children=[
-                dmc.Group(
+                dmc.Grid(
                     children=[
-                        dmc.Stack(
+                        dmc.GridCol(
                             children=[
-                                dmc.Text(self.title, color='primary', style=style_title),
+                                dmc.Stack(
+                                    children=[
+                                        dmc.Text(self.title, c='primary', style=style_title),
+                                    ]
+                                )
                             ],
-                            style={'flex-grow': '1'}
+                            span={"base": 12, "lg": 8},
+                            style={'margin-bottom': '35px'}
                         ),
-                        dmc.Stack(
+                        dmc.GridCol(
                             children=[
-                                dmc.Group(
+                                dmc.Stack(
                                     children=[
-                                        dmc.Text(from_to, color='primary', style=style_title)
-                                    ],
-                                    align='center',
-                                    position='right'
-                                ),
-                                dmc.Group(
-                                    children=[
-                                        dmc.Text(self.location['name'], color='primary', style=style_subtitle),
-                                        DashIconify(icon=self.location['icon'], height=20),
-                                    ],
-                                    align='center',
-                                    position='right'
-                                ),
+                                        dmc.Text(from_to, c='primary', style=style_metadata),
+                                        dmc.Group(
+                                            children=[
+                                                dmc.Text(self.location['name'], c='primary', style=style_metadata),
+                                                DashIconify(icon=self.location['icon'], height=20),
+                                            ],
+                                        ),
+                                    ]
+                                )
                             ],
-                        ),
+                            span='content'
+                        )
                     ],
-                    align='start',
-                    style={'margin-bottom': '40px'}
+                    align='end',
+                    justify='space-between',
+                    style={'margin-bottom': '40px'},
+                    className='experience-moment-period'
                 ),
                 dmc.Group(
                     children=[
                         dmc.Stack(
-                            children=dmc.Text(f'{self.main_description}', color='dimmed', style=style_subtitle),
+                            children=dmc.Text(f'{self.main_description}', c='dimmed', style=style_subtitle),
                             style={'flex-grow': '1'}
                         ),
                     ],
@@ -108,7 +114,6 @@ class ExperienceMoment:
                     children=[
                         dmc.Stack(
                             children=bullets_points,
-                            # style={'flex-grow': '1'}
                         ),
                     ],
                     align='start',
@@ -127,42 +132,82 @@ class ExperienceMoment:
 
     def render_layout(self):
 
-        layout = dmc.Grid(
-            children=[
-                dmc.Col(
-                    children=[
-                        dmc.Card(
-                            children=[
-                                self.__render_institution()
-                            ],
-                            radius=0,
-                            p=30,
-                            style={
-                                'text-align': 'center',
-                                'height': '100%'
-                            }
-                        )
-                    ],
-                    span=4
-                ),
-                dmc.Col(
-                    children=[
-                        dmc.Card(
-                            children=[
-                                self.__render_description()
-                            ],
-                            radius=0,
-                            p=50,
-                            style={
-                                'text-align': 'center',
-                                'height': '100%'
-                            }
-                        )
-                    ],
-                    span=8
-                ),
-            ],
-            gutter="xl"
+        # layout = dmc.Grid(
+        #     children=[
+        #         dmc.GridCol(
+        #             children=[
+        #                 dmc.Card(
+        #                     children=[
+        #                         self.__render_institution()
+        #                     ],
+        #                     radius=0,
+        #                     p=30,
+        #                     style={
+        #                         'text-align': 'center',
+        #                         'height': '100%'
+        #                     }
+        #                 )
+        #             ],
+        #             span=4
+        #         ),
+        #         dmc.GridCol(
+        #             children=[
+        #                 dmc.Card(
+        #                     children=[
+        #                         self.__render_description()
+        #                     ],
+        #                     radius=0,
+        #                     p=50,
+        #                     style={
+        #                         'text-align': 'center',
+        #                         'height': '100%'
+        #                     }
+        #                 )
+        #             ],
+        #             span=8
+        #         ),
+        #     ],
+        #     gutter="xl"
+        # )
+
+        layout = dmc.GridCol(
+            children=dmc.Grid(
+                children=[
+                    dmc.GridCol(
+                        children=[
+                            dmc.Card(
+                                children=[
+                                    self.__render_institution()
+                                ],
+                                radius=0,
+                                p=30,
+                                style={
+                                    'justify-content': 'center',
+                                    'height': '100%'
+                                }
+                            )
+                        ],
+                        span={"base": 12, "sm": 4}
+                    ),
+                    dmc.GridCol(
+                        children=[
+                            dmc.Card(
+                                children=[
+                                    self.__render_description()
+                                ],
+                                radius=0,
+                                p=50,
+                                style={
+                                    'height': '100%'
+                                }
+                            )
+                        ],
+                        span={"base": 12, "sm": 8}
+                    ),
+                ],
+                gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
+            ),
+            span=12
         )
 
         return layout
@@ -173,9 +218,14 @@ class Experience:
         self.experience_moments = [ExperienceMoment(config=em) for em in config]
 
     def render_layout(self):
-        layout = dmc.Stack(
+        # layout = dmc.Stack(
+        #     children=[em.render_layout() for em in self.experience_moments],
+        #     gap='xl'
+        # )
+
+        layout = dmc.Grid(
             children=[em.render_layout() for em in self.experience_moments],
-            spacing='xl'
+            gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
         )
 
         return layout

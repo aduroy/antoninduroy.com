@@ -25,23 +25,23 @@ NAV_TAB_TEXT_STYLE = {'font-size': '20px', 'font-weight': '500', 'font-style': '
 NAV_TAB_STYLE = {'border-radius': '0px', 'padding': '20px 20px'}
 NAV_TABSLISTS = dmc.TabsList(
     children=[
-        dmc.Tab(
+        dmc.TabsTab(
             dmc.Text('ABOUT', style=NAV_TAB_TEXT_STYLE),
             value="about", style=NAV_TAB_STYLE
         ),
-        dmc.Tab(
+        dmc.TabsTab(
             dmc.Text('EXPERIENCE', style=NAV_TAB_TEXT_STYLE),
             value="experience", style=NAV_TAB_STYLE
         ),
-        dmc.Tab(
+        dmc.TabsTab(
             dmc.Text('SIDE QUESTS', style=NAV_TAB_TEXT_STYLE),
             value="side_quests", style=NAV_TAB_STYLE
         ),
-        dmc.Tab(
+        dmc.TabsTab(
             dmc.Text('EDUCATION', style=NAV_TAB_TEXT_STYLE),
-            value="education", ml="auto", style=NAV_TAB_STYLE
+            value="education", style=NAV_TAB_STYLE
         ),
-        dmc.Tab(
+        dmc.TabsTab(
             dmc.Text('ACHIEVEMENTS', style=NAV_TAB_TEXT_STYLE),
             value="achievements", style=NAV_TAB_STYLE
         ),
@@ -51,14 +51,15 @@ NAV_TABSLISTS = dmc.TabsList(
 
 
 app.layout = dmc.MantineProvider(
+    forceColorScheme="dark",
     theme={
         "fontFamily": "'Helvetica Neue', sans-serif",
         # "primaryColor": "indigo",
-        "colorScheme": "dark"
+        # "colorScheme": "dark"
     },
-    inherit=True,
-    withGlobalStyles=True,
-    withNormalizeCSS=True,
+    # inherit=True,
+    withGlobalClasses=True,
+    # withNormalizeCSS=True,
     children=[
         dmc.Container(
             children=[
@@ -93,4 +94,4 @@ app.layout = dmc.MantineProvider(
 
 
 if __name__ == "__main__":
-    app.run_server(debug=False, use_reloader=True)
+    app.run_server(debug=True, use_reloader=True)

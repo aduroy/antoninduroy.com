@@ -1,0 +1,78 @@
+.education-moment-period, .experience-moment-period{
+    text-align: right;
+    @media (max-width: 1199px) {
+        text-align: left;
+    }
+}
+
+.header-name {
+    font-weight: 900;
+    font-size: 45px;
+
+    @media (max-width: 1199px) {
+        font-size: 30px;
+    }
+
+    @media (max-width: 820px) {
+        font-size: 25px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 35px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+    }
+}
+
+.header-name-group {
+    margin-bottom: 90px;
+
+    @media (max-width: 1199px) {
+        margin-top: 30px;
+        margin-bottom: 80px;
+    }
+
+    @media (max-width: 767px) {
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 600px) {
+        margin-bottom: 30px;
+    }
+}
+
+.header-subtitle {
+    font-weight: 500;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 0;
+
+    @media (max-width: 600px) {
+        font-size: 15px;
+    }
+}
+
+.header-subtext {
+    font-weight: 500;
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1;
+
+    @media (max-width: 1199px) {
+        font-size: 25px;
+    }
+
+    @media (max-width: 820px) {
+        font-size: 25px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 30px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+    }
+}

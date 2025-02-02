@@ -20,20 +20,20 @@ class About:
             skills_global += [
                 dmc.Text(
                     skill_global.get('name'),
-                    color="dimmed",
+                    c="dimmed",
                     style={'font-size': '20px', 'font-weight': '500', 'font-style': 'italic', 'line-height': '0'}
                 ),
                 dmc.Progress(value=skill_global.get('progress'), size='xl', radius=0, style={'margin-bottom': '10px'}),
             ]
 
-        layout = dmc.Card(
-            dmc.Group(
+        description_card = dmc.Card(
+            dmc.Grid(
                 children=[
-                    dmc.Stack(
+                    dmc.GridCol(
                         children=[
                             dmc.Text(
                                 'Hi,',
-                                color='dimmed',
+                                c='dimmed',
                                 style={'font-size': '30px', 'font-weight': '500', 'font-style': 'italic',
                                        'line-height': '1'}
                             ),
@@ -42,57 +42,62 @@ class About:
                                 style=style_description,
                             )
                         ],
-                        align='start',
-                        style={'flex': 2}
+                        span={"base": 12, "sm": 6, "lg": 8}
                     ),
-                    dmc.Stack(
-                        children=skills_global,
-                        style={'flex': 1, 'margin-left': '100px'}
+                    dmc.GridCol(
+                        children=[
+                            dmc.Stack(
+                                children=skills_global
+                            )
+                        ],
+                        span={"base": 12, "sm": 6, "lg": 4}
                     )
                 ],
-                style={'gap': '100px'},
+                gutter='100px',
+                align='center'
             ),
             radius=0,
             p=50,
         )
 
-        layout = dmc.Group(
+        grid_column = dmc.GridCol(
             children=[
-                dmc.Stack([
-                    layout,
-                ]),
+                description_card
             ],
-            style={'flex-flow': 'nowrap'},
-            align='start',
-            grow=True
+            span=12
         )
 
-        return layout
+        grid_columns = [grid_column]
+
+        return grid_columns
 
     def __render_skills(self):
 
         skill_name_style = {'font-size': '25px', 'font-weight': '500', 'font-style': 'italic', 'margin-bottom': '40px', 'margin-top': '10px'}
         style_keywords = {'font-size': '12px', 'font-weight': '300', 'font-style': 'italic', 'padding': '16px 16px'}
 
-        grid_elmts = []
+        grid_columns = []
         for s in self.skills:
             keywords = dmc.Group(
                 children=[
                     dmc.Badge(
                         kw,
-                        radius=0, style=style_keywords) for kw in s.get('keywords')
+                        radius=0,
+                        variant='primary',
+                        style=style_keywords
+                    ) for kw in s.get('keywords')
                 ],
-                position='center'
+                justify='center'
             )
 
-            elmt = dmc.Col(
+            elmt = dmc.GridCol(
                 children=[
                     dmc.Card(
                         children=[
-                            dmc.Col(
+                            dmc.GridCol(
                                 children=[
                                     DashIconify(icon=s.get('icon'), height=50, color='rgb(25, 113, 194)'),
-                                    dmc.Text(s.get('name'), color="primary", style=skill_name_style),
+                                    dmc.Text(s.get('name'), c="primary", style=skill_name_style),
                                     keywords
                                 ]
                             ),
@@ -106,25 +111,26 @@ class About:
                         }
                     )
                 ],
-                lg=4,
-                md=6
+                span={"base": 12, "sm": 6, "lg": 4}
             )
-            grid_elmts.append(elmt)
+            grid_columns.append(elmt)
 
-        layout = dmc.Grid(
-            children=grid_elmts,
-            gutter="xl"
-        )
-
-        return layout
+        return grid_columns
 
     def render_layout(self):
+
+        skills = self.__render_skills()
+        description = self.__render_description()
+        grid_columns = description + skills
+
         layout = dmc.Stack(
             children=[
-                self.__render_description(),
-                self.__render_skills(),
+                dmc.Grid(
+                    children=grid_columns,
+                    gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
+                )
             ],
-            spacing='xl'
+            gap='xl'
         )
 
         return layout

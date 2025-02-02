@@ -21,22 +21,23 @@ class Achievements:
                 children=[
                     dmc.Badge(
                         kw,
+                        variant='primary',
                         radius=0, style=style_keywords
                     ) for kw in a.get('keywords')
                 ],
-                position='center'
+                justify='center'
             )
 
-            elmt = dmc.Col(
+            elmt = dmc.GridCol(
                 children=[
                     dmc.Card(
                         children=[
-                            dmc.Col(
+                            dmc.GridCol(
                                 children=[
                                     DashIconify(icon=a.get('icon'), height=50, color='rgb(25, 113, 194)'),
-                                    dmc.Text(a.get('name'), color="primary", style=achievement_name_style),
-                                    dmc.Text(a.get('achievement'), color="dimmed", style=achievement_style),
-                                    dmc.Text(a.get('context'), color="dimmed", style=achievement_context_style),
+                                    dmc.Text(a.get('name'), c="primary", style=achievement_name_style),
+                                    dmc.Text(a.get('achievement'), c="dimmed", style=achievement_style),
+                                    dmc.Text(a.get('context'), c="dimmed", style=achievement_context_style),
                                     keywords
                                 ]
                             ),
@@ -50,14 +51,13 @@ class Achievements:
                         }
                     )
                 ],
-                lg=4,
-                md=6
+                span={"base": 12, "sm": 6, "lg": 4}
             )
             grid_elmts.append(elmt)
 
         layout = dmc.Grid(
             children=grid_elmts,
-            gutter="xl"
+            gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
         )
 
         return layout
@@ -67,7 +67,7 @@ class Achievements:
             children=[
                 self.__render_achievements(),
             ],
-            spacing='xl'
+            gap='xl'
         )
 
         return layout

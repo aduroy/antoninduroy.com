@@ -19,7 +19,7 @@ app_config = {
             }
         ],
         "location": {
-            "name": "Amsterdam, NL",
+            "name": "Amsterdam - NL",
             "icon": "flagpack:nl"
         },
         "language_icons": [
@@ -28,7 +28,7 @@ app_config = {
         ]
     },
     "about": {
-        "text": "Data Engineer / Scientist & Software Engineer with many years of experience in various environments, I am passionate about all the aspects of data-driven projects, such as design, ETL, analyses, dataviz and ML/AI.",
+        "text": "Data Engineer / Scientist & Software Engineer with many years of experience in various environments, I am passionate about all the aspects of data-driven projects, such as design, architecture, ETL, analyses, dataviz and ML/AI.",
         "skills_global": [
             {
                 "name": "BACK-END DEVELOPMENT",
@@ -56,7 +56,7 @@ app_config = {
                 "icon": "mdi:tools",
                 "name": "DEVELOPMENT",
                 "keywords": [
-                    "python", "FastAPI", "gunicorn", "plotly dash", "Pycharm"
+                    "python", "FastAPI", "spark", "plotly dash", "Pycharm"
                 ]
             },
             {
@@ -70,7 +70,7 @@ app_config = {
                 "icon": "pepicons-pencil:internet",
                 "name": "CLOUD",
                 "keywords": [
-                    "AWS", "GCP", "Heroku", "Databricks", "architecture"
+                    "GCP", "AWS", "Databricks", "Fabric", "Heroku"
                 ]
             },
             {
@@ -110,7 +110,7 @@ app_config = {
             ],
             "logo": {
                 "path": "assets/logo_aon.svg",
-                "size": 200
+                "width": 200
             },
             "company": {
                 "display_name": "AON",
@@ -144,7 +144,7 @@ app_config = {
             ],
             "logo": {
                 "path": "assets/logo_thecirqle.png",
-                "size": 200
+                "width": 200
             },
             "company": {
                 "display_name": "The Cirqle",
@@ -177,7 +177,7 @@ app_config = {
             ],
             "logo": {
                 "path": "assets/logo_okast.png",
-                "size": 200
+                "width": 200
             },
             "company": {
                 "display_name": "Okast.tv",
@@ -211,7 +211,7 @@ app_config = {
             ],
             "logo": {
                 "path": "assets/logo_semji.png",
-                "size": 200
+                "width": 200
             },
             "company": {
                 "display_name": "Semji",
@@ -239,13 +239,13 @@ app_config = {
             "main_description": "Text classification of scientific articles using state-of-the-art Machine Learning techniques.",
             "bullet_points": [
                 "State of the art of Text Processing",
-                "Text segmentation from PDF files as dataset",
+                "Text extraction & segmentation from PDF files",
                 "Domain-specific ontology",
                 "ML models for text classification"
             ],
             "logo": {
                 "path": "assets/logo_inrae.png",
-                "size": 200
+                "width": 200
             },
             "company": {
                 "display_name": "INRAE",
@@ -273,10 +273,10 @@ app_config = {
         {
             "title": "Software & AI Engineer",
             "subtitle": "Master of Science",
-            "description": "EPITA is a private French \"Grande Ecole\" specialized in the field of computer science and software engineering created in 1984.",
+            "description": "EPITA is a French \"Grande Ecole\" specialized in the field of computer science and software engineering created in 1984. It is famous for its hardcore programming assignments, projects and atypical educational process.",
             "logo": {
                 "path": "assets/logo_epita_2.png",
-                "size": 200
+                "width": 200
             },
             "handle": {
                 "display_name": "EPITA",
@@ -297,12 +297,12 @@ app_config = {
             ]
         },
         {
-            "title": "CPGE - Classes Préparatoires aux Grandes Ecoles",
+            "title": "Classes Préparatoires aux Grandes Ecoles",
             "subtitle": "MPSI - PSI*",
             "description": "Classes Préparatoires consist of two years of study which act as an intensive preparatory course with the main goal of training students for enrolment in one of the \"Grandes Ecoles\". The workload is one of the highest in Europe - Wikipedia",
             "logo": {
                 "path": "assets/logo_montesquieu_2.png",
-                "size": 150
+                "width": 150
             },
             "handle": {
                 "display_name": "Lycée Montesquieu",
@@ -416,7 +416,7 @@ app_config = {
         {
             "icon": "streamline:desktop-game",
             "name": "LEAGUE OF LEGENDS",
-            "achievement": "TOP 0.5%",
+            "achievement": "TOP 0.5% - Solo",
             "context": "Europe-West",
             "keywords": [
                 "Video game", "MOBA", "PVP"
@@ -425,7 +425,7 @@ app_config = {
         {
             "icon": "streamline:desktop-game",
             "name": "WORLD OF WARCRAFT",
-            "achievement": "TOP 50",
+            "achievement": "TOP 50 - Team",
             "context": "Europe-West",
             "keywords": [
                 "Video game", "MMORPG", "PVP"
@@ -434,7 +434,7 @@ app_config = {
         {
             "icon": "streamline:desktop-game",
             "name": "TRACKMANIA",
-            "achievement": "TOP 0.5%",
+            "achievement": "TOP 0.5% - Solo",
             "context": "Worldwide",
             "keywords": [
                 "Video game", "Racing", "Arcade"
@@ -443,7 +443,7 @@ app_config = {
         {
             "icon": "emojione-monotone:rugby-football",
             "name": "RUGBY 7's",
-            "achievement": "TOP 15",
+            "achievement": "TOP 15 - Team",
             "context": "France",
             "keywords": [
                 "7's", "National", "Finals"

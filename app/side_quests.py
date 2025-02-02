@@ -25,7 +25,7 @@ class SideQuests:
                         target='_blank'
                     ) for l in sq.get('links')
                 ],
-                position='center',
+                justify='center',
                 style={'margin-bottom': '30px'}
             )
 
@@ -33,20 +33,22 @@ class SideQuests:
                 children=[
                     dmc.Badge(
                         kw,
-                        radius=0, style=style_keywords) for kw in sq.get('keywords')
+                        variant='primary',
+                        radius=0, style=style_keywords
+                    ) for kw in sq.get('keywords')
                 ],
-                position='center'
+                justify='center'
             )
 
-            elmt = dmc.Col(
+            elmt = dmc.GridCol(
                 children=[
                     dmc.Card(
                         children=[
-                            dmc.Col(
+                            dmc.GridCol(
                                 children=[
                                     DashIconify(icon=sq.get('icon'), height=50, color='rgb(25, 113, 194)'),
-                                    dmc.Text(sq.get('name'), color="primary", style=skill_name_style),
-                                    dmc.Text(sq.get('description'), color="dimmed", style=style_subtitle),
+                                    dmc.Text(sq.get('name'), c="primary", style=skill_name_style),
+                                    dmc.Text(sq.get('description'), c="dimmed", style=style_subtitle),
                                     links,
                                     keywords
                                 ]
@@ -61,14 +63,13 @@ class SideQuests:
                         }
                     )
                 ],
-                lg=4,
-                md=6
+                span={"base": 12, "sm": 6, "lg": 4}
             )
             grid_elmts.append(elmt)
 
         layout = dmc.Grid(
             children=grid_elmts,
-            gutter="xl"
+            gutter={"base": 'xs', "sm": 'md', "lg": 'lg'}
         )
 
         return layout
@@ -78,7 +79,7 @@ class SideQuests:
             children=[
                 self.__render_skills(),
             ],
-            spacing='xl'
+            gap='xl'
         )
 
         return layout
