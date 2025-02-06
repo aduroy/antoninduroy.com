@@ -344,7 +344,7 @@ app_config = {
             "links": [
                 {
                     "name": "Github",
-                    "url": "https://github.com/aduroy"
+                    "url": "https://github.com/aduroy/antoninduroy.com"
                 }
             ],
             "keywords": [
