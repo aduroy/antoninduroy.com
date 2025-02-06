@@ -200,7 +200,7 @@ app_config = {
             ]
         },
         {
-            "title": "Data Scientist",
+            "title": "Data Scientist / Engineer",
             "main_description": "Automatic text generation & classification of website pages for SEO purpose.",
             "bullet_points": [
                 "State of the art of Text Generation",
@@ -235,7 +235,7 @@ app_config = {
             ]
         },
         {
-            "title": "Research Engineer",
+            "title": "ML Research Engineer",
             "main_description": "Text classification of scientific articles using state-of-the-art Machine Learning techniques.",
             "bullet_points": [
                 "State of the art of Text Processing",

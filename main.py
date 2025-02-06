@@ -18,6 +18,8 @@ app = Dash(
     ],
 )
 
+app.title = 'Antonin DUROY'
+
 server = app.server
 
 
