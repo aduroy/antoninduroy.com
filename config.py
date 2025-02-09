@@ -56,7 +56,7 @@ app_config = {
                 "icon": "mdi:tools",
                 "name": "DEVELOPMENT",
                 "keywords": [
-                    "python", "FastAPI", "spark", "plotly dash", "Pycharm"
+                    "python", "FastAPI", "spark", "plotly dash", "CI/CD"
                 ]
             },
             {
