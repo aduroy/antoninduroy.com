@@ -452,7 +452,7 @@ app_config = {
         {
             "icon": "f7:function",
             "name": "KANGOUROU DES MATHS",
-            "achievement": "Ranked 130 / 50 000",
+            "achievement": "Ranked 130 / ~50 000",
             "context": "France",
             "keywords": [
                 "Logic games", "National", "School"
