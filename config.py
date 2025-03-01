@@ -460,7 +460,7 @@ app_config = {
         },
         {
             "icon": "f7:function",
-            "name": "MATHS & LOGIC GAMES",
+            "name": "MATHS & LOGIC GAMES (FFJM)",
             "achievement": "Ranked 19 (finals)",
             "context": "Worldwide",
             "keywords": [
