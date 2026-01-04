@@ -7,7 +7,7 @@ app_config = {
         "avatar_path": "assets/avatar.png",
         "date_of_birth": 1990,
         "date_of_first_employment": 2012,
-        "role": "Data Engineer / Scientist",
+        "role": "Lead Data Engineer / Scientist",
         "contact": [
             {
                 "icon": "mdi:linkedin",
